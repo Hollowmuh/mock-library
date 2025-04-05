@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library</title>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>My Library</h1>
+            <button id="newBookBtn" class="add-btn">+ Add New Book</button>
+            <nav>
+                <a href="catalog.html">Go to Books</a>
+            </nav>
+        </header>
+
+        <main>
+            <div id="books-grid" class="books-grid">
+                <!-- Books will be dynamically added here -->
+            </div>
+
+            <div class="modal" id="bookModal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Add New Book</h2>
+                    <form id="bookForm">
+                        <input type="text" id="title" placeholder="Title" required>
+                        <input type="text" id="author" placeholder="Author" required>
+                        <input type="number" id="pages" placeholder="Pages" required>
+                        <div class="read-status">
+                            <label for="read">Have you read it?</label>
+                            <input type="checkbox" id="read">
+                        </div>
+                        <button type="submit">Add Book</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="../scripts/script.js"></script>
+</body>
+</html>
