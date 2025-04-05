@@ -5,6 +5,7 @@ body {
     padding: 0;
     background-color: #f4f4f9;
     color: #333;
+    line-height: 1.6;
 }
 
 header {
@@ -12,12 +13,16 @@ header {
     color: white;
     padding: 1rem;
     text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .container {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 1rem;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .books-grid {
@@ -38,6 +43,7 @@ header {
 
 .book-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .status {
@@ -52,37 +58,28 @@ header {
     color: #f44336;
 }
 
-.add-btn {
+.add-btn,
+.remove-btn,
+.toggle-read {
     background-color: #4CAF50;
     color: white;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-btn:hover,
+.remove-btn:hover,
+.toggle-read:hover {
+    background-color: #3e8e41;
 }
 
 .card-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
-}
-
-.remove-btn {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.toggle-read {
-    background-color: #2196F3;
-    color: white;
-    border: none;
-    padding: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
 /* Modal styles */
@@ -104,6 +101,7 @@ header {
     border-radius: 5px;
     width: 50%;
     max-width: 500px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .close {
@@ -124,6 +122,11 @@ input {
     padding: 0.5rem;
     border: 1px solid #ddd;
     border-radius: 4px;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    border-color: #4CAF50;
 }
 
 .read-status {
@@ -131,3 +134,4 @@ input {
     align-items: center;
     gap: 0.5rem;
 }
+
