@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catalog - My Library</title>
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Book Catalog</h1>
+            <nav>
+                <a href="index.html">Back to Library</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="catalog-filters">
+                <input type="text" id="searchInput" placeholder="Search by title or author...">
+                <select id="filterSelect">
+                    <option value="all">All Books</option>
+                    <option value="read">Read</option>
+                    <option value="unread">Not Read</option>
+                </select>
+            </div>
+
+            <div id="catalog-grid" class="books-grid">
+                <!-- Books will be dynamically added here -->
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import myLibrary from '../scripts/script.js';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const catalogGrid = document.getElementById('catalog-grid');
+            const searchInput = document.getElementById('searchInput');
+            const filterSelect = document.getElementById('filterSelect');
+            
+            function displayCatalog(filter = 'all', searchTerm = '') {
+                let books = myLibrary.getAllBooks();
+                
+                // Apply filter
+                if (filter === 'read') {
+                    books = books.filter(book => book.isRead);
+                } else if (filter === 'unread') {
+                    books = books.filter(book => !book.isRead);
+                }
+                
+                // Apply search
+                if (searchTerm) {
+                    const term = searchTerm.toLowerCase();
+                    books = books.filter(book => 
+                        book.title.toLowerCase().includes(term) || 
+                        book.author.toLowerCase().includes(term)
+                    );
+                }
+                
+                // Display filtered books
+                catalogGrid.innerHTML = books.length ? books.map(book => `
+                    <div class="book-card">
+                        <h3>${book.title}</h3>
+                        <p>By: ${book.author}</p>
+                        <p>Pages: ${book.pages}</p>
+                        <p class="status ${book.isRead ? 'read' : 'not-read'}">
+                            ${book.isRead ? 'Read' : 'Not Read Yet'}
+                        </p>
+                    </div>
+                `).join('') : '<p>No books found matching your criteria.</p>';
+            }
+            
+            // Event listeners for search and filter
+            searchInput.addEventListener('input', () => {
+                displayCatalog(filterSelect.value, searchInput.value);
+            });
+            
+            filterSelect.addEventListener('change', () => {
+                displayCatalog(filterSelect.value, searchInput.value);
+            });
+            
+            // Initial display
+            displayCatalog();
+        });
+    </script>
+</body>
+</html>
